@@ -1,6 +1,6 @@
 //
 //  dafoma_31App.swift
-//  PixelPlay Avi
+//  PixelAvi Play
 //
 //  Created by Вячеслав on 8/26/25.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 @main
-struct PixelPlayAviApp: App {
+struct PixelAviPlayApp: App {
     let persistenceController = DataService.shared
     
     var body: some Scene {

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  PixelPlay Avi
+//  PixelAvi Play
 //
 //  Created by Вячеслав on 8/26/25.
 //
@@ -135,7 +135,7 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    Text("PixelPlay Avi")
+                    Text("PixelAvi Play")
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)

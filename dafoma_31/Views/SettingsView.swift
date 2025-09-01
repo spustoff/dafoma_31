@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  PixelPlay Avi
+//  PixelAvi Play
 //
 //  Created by Вячеслав on 8/26/25.
 //
@@ -234,7 +234,7 @@ struct SettingsView: View {
                         .foregroundColor(.blue)
                         .frame(width: 25)
                     
-                    Text("About PixelPlay Avi")
+                    Text("About PixelAvi Play")
                 }
             }
             .onTapGesture {
@@ -466,7 +466,7 @@ struct AboutView: View {
                             .font(.system(size: 80))
                             .foregroundColor(Color(hex: "#28a809"))
                         
-                        Text("PixelPlay Avi")
+                        Text("PixelAvi Play")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         
@@ -480,7 +480,7 @@ struct AboutView: View {
                         Text("About")
                             .font(.headline)
                         
-                        Text("PixelPlay Avi is a unique puzzle game that combines engaging grid-based challenges with powerful focus utilities. Match colorful patterns while building productive habits through integrated focus sessions.")
+                        Text("PixelAvi Play is a unique puzzle game that combines engaging grid-based challenges with powerful focus utilities. Match colorful patterns while building productive habits through integrated focus sessions.")
                             .font(.body)
                             .foregroundColor(.secondary)
                     }
@@ -621,7 +621,7 @@ struct DataExportView: View {
     }
     
     private func createExportString() -> String {
-        var result = "PixelPlay Avi - Data Export\n\n"
+        var result = "PixelAvi Play - Data Export\n\n"
         
         for (key, value) in exportData.sorted(by: { $0.key < $1.key }) {
             result += "\(key): \(value)\n"

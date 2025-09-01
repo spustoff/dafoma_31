@@ -1,6 +1,6 @@
 //
 //  OnboardingView.swift
-//  PixelPlay Avi
+//  PixelAvi Play
 //
 //  Created by Вячеслав on 8/26/25.
 //
@@ -124,7 +124,7 @@ struct OnboardingView: View {
                     .opacity(animateElements ? 1.0 : 0.0)
                     .animation(.easeInOut(duration: 0.8).delay(0.2), value: animateElements)
                 
-                Text("PixelPlay Avi")
+                Text("PixelAvi Play")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -489,7 +489,7 @@ struct PrivacyPolicyView: View {
                     Group {
                         privacySection(
                             title: "Data Collection",
-                            content: "PixelPlay Avi does not collect, store, or transmit any personal data to external servers. All game progress, statistics, and focus session data are stored locally on your device using Core Data."
+                            content: "PixelAvi Play does not collect, store, or transmit any personal data to external servers. All game progress, statistics, and focus session data are stored locally on your device using Core Data."
                         )
                         
                         privacySection(

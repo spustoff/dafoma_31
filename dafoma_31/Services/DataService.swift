@@ -1,6 +1,6 @@
 //
 //  DataService.swift
-//  PixelPlay Avi
+//  PixelAvi Play
 //
 //  Created by Вячеслав on 8/26/25.
 //
@@ -19,7 +19,7 @@ class DataService: ObservableObject {
     
     // MARK: - Core Data Stack
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "PixelPlayModel")
+        let container = NSPersistentContainer(name: "PixelAviPlayModel")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Core Data error: \(error), \(error.userInfo)")

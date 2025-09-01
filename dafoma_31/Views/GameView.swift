@@ -1,6 +1,6 @@
 //
 //  GameView.swift
-//  PixelPlay Avi
+//  PixelAvi Play
 //
 //  Created by Вячеслав on 8/26/25.
 //
@@ -68,7 +68,7 @@ struct GameView: View {
                     .font(.system(size: 80))
                     .foregroundColor(Color(hex: userProfile.selectedTheme.primaryColor))
                 
-                Text("PixelPlay Avi")
+                Text("PixelAvi Play")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

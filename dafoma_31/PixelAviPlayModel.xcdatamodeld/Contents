@@ -50,3 +50,4 @@
         <attribute name="username" optional="YES" attributeType="String"/>
     </entity>
 </model>
+

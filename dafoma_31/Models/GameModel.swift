@@ -1,6 +1,6 @@
 //
 //  GameModel.swift
-//  PixelPlay Avi
+//  PixelAvi Play
 //
 //  Created by Вячеслав on 8/26/25.
 //
@@ -326,3 +326,4 @@ class GameSession: ObservableObject {
         timer?.invalidate()
     }
 }
+
