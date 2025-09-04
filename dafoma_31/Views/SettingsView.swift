@@ -24,9 +24,6 @@ struct SettingsView: View {
                 // Game Settings
                 gameSettingsSection
                 
-                // Appearance
-                appearanceSection
-                
                 // Notifications & Sounds
                 notificationsSection
                 
