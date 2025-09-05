@@ -145,16 +145,19 @@ struct GameView: View {
             gameHUD
             
             // Target Pattern
-            targetPatternView
-            
-            // Game Grid
-            gameGridView
-            
-            // Color Palette
-            colorPaletteView
-            
-            // Bottom Controls
-            gameControlsView
+            ScrollView(.vertical, showsIndicators: false) {
+                
+                targetPatternView
+                
+                // Game Grid
+                gameGridView
+                
+                // Color Palette
+                colorPaletteView
+                
+                // Bottom Controls
+                gameControlsView
+            }
             
             Spacer(minLength: 0)
         }
