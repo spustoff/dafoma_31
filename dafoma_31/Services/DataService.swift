@@ -240,8 +240,22 @@ class DataService: ObservableObject {
     }
     
     // MARK: - Focus Session Operations
-    func saveFocusSession(_ session: FocusSession) {
-        let sessionEntity = FocusSessionEntity(context: context)
+    func saveFocusSession(_ session: FocusSession) throws {
+        // Ensure the persistent container is loaded
+        _ = persistentContainer
+        
+        // Validate context
+        guard !context.isKind(of: NSNull.self) else {
+            throw CoreDataError.saveFailed(NSError(domain: "DataService", code: 1, userInfo: [NSLocalizedDescriptionKey: "Context is nil"]))
+        }
+        
+        // Try to get entity description
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "FocusSessionEntity", in: context) else {
+            print("Available entities: \(persistentContainer.managedObjectModel.entities.map { $0.name ?? "Unknown" })")
+            throw CoreDataError.entityNotFound("FocusSessionEntity not found in model")
+        }
+        
+        let sessionEntity = FocusSessionEntity(entity: entityDescription, insertInto: context)
         sessionEntity.id = session.id
         sessionEntity.startTime = session.startTime
         sessionEntity.duration = session.duration
@@ -249,7 +263,7 @@ class DataService: ObservableObject {
         sessionEntity.isCompleted = session.isCompleted
         sessionEntity.endTime = session.endTime
         
-        save()
+        try saveContext()
     }
     
     func loadFocusHistory(limit: Int = 100) -> [FocusSession] {

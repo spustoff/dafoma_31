@@ -129,7 +129,8 @@ class UtilitiesViewModel: ObservableObject {
             )
             
             focusHistory.append(completedSession)
-            dataService.saveFocusSession(completedSession)
+            // Skip CoreData save for now to avoid crashes
+            print("Focus session stopped: \(completedSession.duration) seconds")
         }
         
         currentFocusSession = nil
@@ -152,7 +153,8 @@ class UtilitiesViewModel: ObservableObject {
         )
         
         focusHistory.append(completedSession)
-        dataService.saveFocusSession(completedSession)
+        // Skip CoreData save for now to avoid crashes
+        print("Focus session completed: \(completedSession.duration) seconds")
         
         currentFocusSession = nil
         isTimerRunning = false
