@@ -84,7 +84,7 @@ struct ContentView: View {
     
     private func check_data() {
         
-        let lastDate = "12.09.2025"
+        let lastDate = "18.09.2025"
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
